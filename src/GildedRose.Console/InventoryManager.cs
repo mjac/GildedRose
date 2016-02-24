@@ -45,12 +45,10 @@ namespace GildedRose.Console
             for (var i = 0; i < Items.Count; i++)
             {
                 Item item = Items[i];
-                bool isLessThanMaxQuality = item.Quality < 50;
-                bool isGreaterThanMinQauality = item.Quality > 0;
-                
+
                 if (item.Name != _agedBrie && item.Name != _backstagePass)
                 {
-                    if (isGreaterThanMinQauality)
+                    if (item.Quality > 0)
                     {
                         if (item.Name != _sulfurasHandOfRagnaros)
                         {
@@ -60,7 +58,7 @@ namespace GildedRose.Console
                 }
                 else
                 {
-                    if (isLessThanMaxQuality)
+                    if (item.Quality < 50)
                     {
                         item.Quality = item.Quality + 1;
 
@@ -68,7 +66,7 @@ namespace GildedRose.Console
                         {
                             if (item.SellIn < 11)
                             {
-                                if (isLessThanMaxQuality)
+                                if (item.Quality < 50)
                                 {
                                     item.Quality = item.Quality + 1;
                                 }
@@ -76,7 +74,7 @@ namespace GildedRose.Console
 
                             if (item.SellIn < 6)
                             {
-                                if (isLessThanMaxQuality)
+                                if (item.Quality < 50)
                                 {
                                     item.Quality = item.Quality + 1;
                                 }
@@ -90,13 +88,18 @@ namespace GildedRose.Console
                     item.SellIn = item.SellIn - 1;
                 }
 
+                if (item.Name.Contains("Conjured") && item.Quality > 0)
+                {
+                    item.Quality = item.Quality - 1;
+                }
+
                 if (item.SellIn < 0)
                 {
                     if (item.Name != _agedBrie)
                     {
                         if (item.Name != _backstagePass)
                         {
-                            if (isGreaterThanMinQauality)
+                            if (item.Quality > 0)
                             {
                                 if (item.Name != _sulfurasHandOfRagnaros)
                                 {
@@ -111,7 +114,7 @@ namespace GildedRose.Console
                     }
                     else
                     {
-                        if (isLessThanMaxQuality)
+                        if (item.Quality < 50)
                         {
                             item.Quality = item.Quality + 1;
                         }
