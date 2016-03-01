@@ -37,11 +37,68 @@ namespace GildedRose.Console
         {
             foreach (var item in Items)
             {
-                if (IsDegradeableItemType(item))
+                UpdateItemQuality(item);
+            }
+        }
+
+        private static void UpdateItemQuality(Item item)
+        {
+            if (IsDegradeableItemType(item))
+            {
+                if (CanBeDegradable(item))
                 {
-                    if (CanBeDegradable(item))
+                    DegradeItem(item);
+                }
+            }
+            else
+            {
+                if (item.Quality < 50)
+                {
+                    item.Quality = item.Quality + 1;
+
+                    if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
                     {
-                        DegradeItem(item);
+                        if (item.SellIn < 11)
+                        {
+                            if (item.Quality < 50)
+                            {
+                                item.Quality = item.Quality + 1;
+                            }
+                        }
+
+                        if (item.SellIn < 6)
+                        {
+                            if (item.Quality < 50)
+                            {
+                                item.Quality = item.Quality + 1;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (item.Name != "Sulfuras, Hand of Ragnaros")
+            {
+                item.SellIn = item.SellIn - 1;
+            }
+
+            if (item.SellIn < 0)
+            {
+                if (item.Name != "Aged Brie")
+                {
+                    if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
+                    {
+                        if (IsDegradeableItemType(item))
+                        {
+                            if (CanBeDegradable(item))
+                            {
+                                DegradeItem(item);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        item.Quality = item.Quality - item.Quality;
                     }
                 }
                 else
@@ -49,58 +106,6 @@ namespace GildedRose.Console
                     if (item.Quality < 50)
                     {
                         item.Quality = item.Quality + 1;
-
-                        if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
-                        {
-                            if (item.SellIn < 11)
-                            {
-                                if (item.Quality < 50)
-                                {
-                                    item.Quality = item.Quality + 1;
-                                }
-                            }
-
-                            if (item.SellIn < 6)
-                            {
-                                if (item.Quality < 50)
-                                {
-                                    item.Quality = item.Quality + 1;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                if (item.Name != "Sulfuras, Hand of Ragnaros")
-                {
-                    item.SellIn = item.SellIn - 1;
-                }
-
-                if (item.SellIn < 0)
-                {
-                    if (item.Name != "Aged Brie")
-                    {
-                        if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
-                        {
-                            if (IsDegradeableItemType(item))
-                            {
-                                if (CanBeDegradable(item))
-                                {
-                                    DegradeItem(item);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            item.Quality = item.Quality - item.Quality;
-                        }
-                    }
-                    else
-                    {
-                        if (item.Quality < 50)
-                        {
-                            item.Quality = item.Quality + 1;
-                        }
                     }
                 }
             }
