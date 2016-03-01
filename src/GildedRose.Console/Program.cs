@@ -33,6 +33,9 @@ namespace GildedRose.Console
             System.Console.ReadKey();
         }
 
+        /// <summary>
+        /// Only allowed to change this for kata1
+        /// </summary>
         public void UpdateQuality()
         {
             for (var i = 0; i < Items.Count; i++)
