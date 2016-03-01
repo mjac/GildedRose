@@ -39,9 +39,9 @@ namespace GildedRose.Console
             {
                 if (IsDegradeableItemType(item))
                 {
-                    if (item.Quality > 0)
+                    if (CanBeDegradable(item))
                     {
-                        item.Quality = item.Quality - 1;
+                        DegradeItem(item);
                     }
                 }
                 else
@@ -104,6 +104,16 @@ namespace GildedRose.Console
                     }
                 }
             }
+        }
+
+        private static void DegradeItem(Item item)
+        {
+            item.Quality = item.Quality - 1;
+        }
+
+        private static bool CanBeDegradable(Item item)
+        {
+            return item.Quality > 0;
         }
 
         private static bool IsDegradeableItemType(Item item)
