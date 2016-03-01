@@ -19,6 +19,13 @@ namespace GildedRose.Tests
             return GetUpdatedItemQuality(StandardObjectType, quality, sellIn);
         }
 
+        [TestCase(HighPositiveQuality, HighPositiveSellIn, ExpectedResult = HighPositiveQuality - 2)]
+        [TestCase(HighPositiveQuality, NegativeSellIn, ExpectedResult = HighPositiveQuality - 4)]
+        public int ConjuredItemQualityChangedTo(int quality, int sellIn)
+        {
+            return GetUpdatedItemQuality("Conjured " + StandardObjectType, quality, sellIn);
+        }
+
         private static int GetUpdatedItemQuality(string name, int quality, int sellIn)
         {
             var item = new Item {Name = name, Quality = quality, SellIn = sellIn};
