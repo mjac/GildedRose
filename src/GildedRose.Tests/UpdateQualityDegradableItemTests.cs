@@ -21,6 +21,7 @@ namespace GildedRose.Tests
 
         [TestCase(HighPositiveQuality, HighPositiveSellIn, ExpectedResult = HighPositiveQuality - 2)]
         [TestCase(HighPositiveQuality, NegativeSellIn, ExpectedResult = HighPositiveQuality - 4)]
+        [TestCase(1, HighPositiveSellIn, ExpectedResult = 0, Description = "Quality should never drop below zero")]
         public int ConjuredItemQualityChangedTo(int quality, int sellIn)
         {
             return GetUpdatedItemQuality("Conjured " + StandardObjectType, quality, sellIn);
