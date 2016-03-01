@@ -1,4 +1,6 @@
-﻿namespace GildedRose.Console
+﻿using System.Runtime.Serialization.Formatters;
+
+namespace GildedRose.Console
 {
     internal static class QualityAdjuster
     {
@@ -75,6 +77,11 @@
         private static void DegradeItem(Item item)
         {
             item.Quality = item.Quality - 1;
+            if (item.Name.Contains("Conjured"))
+            {
+                item.Quality = item.Quality - 1;
+            }
+
         }
 
         private static bool CanBeDegradable(Item item)
