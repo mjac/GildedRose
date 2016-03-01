@@ -82,11 +82,11 @@ namespace GildedRose.Console
                     {
                         if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
                         {
-                            if (item.Quality > 0)
+                            if (IsDegradeableItemType(item))
                             {
-                                if (item.Name != "Sulfuras, Hand of Ragnaros")
+                                if (CanBeDegradable(item))
                                 {
-                                    item.Quality = item.Quality - 1;
+                                    DegradeItem(item);
                                 }
                             }
                         }
