@@ -37,7 +37,7 @@ namespace GildedRose.Console
         {
             foreach (var item in Items)
             {
-                if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert" && item.Name != "Sulfuras, Hand of Ragnaros")
+                if (NonDegradeableItems(item))
                 {
                     if (item.Quality > 0)
                     {
@@ -104,6 +104,11 @@ namespace GildedRose.Console
                     }
                 }
             }
+        }
+
+        private static bool NonDegradeableItems(Item item)
+        {
+            return item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert" && item.Name != "Sulfuras, Hand of Ragnaros";
         }
     }
 
