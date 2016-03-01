@@ -37,7 +37,7 @@ namespace GildedRose.Console
         {
             foreach (var item in Items)
             {
-                if (NonDegradeableItems(item))
+                if (IsDegradeableItemType(item))
                 {
                     if (item.Quality > 0)
                     {
@@ -106,7 +106,7 @@ namespace GildedRose.Console
             }
         }
 
-        private static bool NonDegradeableItems(Item item)
+        private static bool IsDegradeableItemType(Item item)
         {
             return item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert" && item.Name != "Sulfuras, Hand of Ragnaros";
         }
